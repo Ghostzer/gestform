@@ -5,7 +5,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
+import org.rlopez.gestform.models.Formation;
 import org.rlopez.gestform.models.Stagiaire;
 
 public class StagiaireDAO {
@@ -48,6 +51,43 @@ public class StagiaireDAO {
             throw new Exception("error while creating personne " + e.getMessage());
         }
     }
+	
+	
+	
+	public static List<Stagiaire> findAllStagiaire() {
+
+		Connection connection = ConnectDB.getConnection();
+
+		List<Stagiaire> Stagiaires = new ArrayList<>();
+		Statement stm;
+		try {
+			stm = connection.createStatement();
+
+			String sql = "select * from Stagiaire INNER JOIN Formation ON Stagiaire.id_formation=Formation.id ";
+			ResultSet rs = stm.executeQuery(sql);
+
+			while (rs.next()) {
+
+				String nom = rs.getString("nom");
+				String prenom = rs.getString("prenom");
+
+				Stagiaire s = new Stagiaire(nom, prenom);
+
+				Stagiaires.add(s);
+			}
+			rs.close();
+
+		} catch (SQLException e) {
+			throw new RuntimeException();
+		}
+
+		return Stagiaires;
+
+	}
+	
+	
+	
+	
 
 	
 }

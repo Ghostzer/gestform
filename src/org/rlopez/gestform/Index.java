@@ -4,10 +4,13 @@ package org.rlopez.gestform;
 import java.util.List;
 import java.util.Scanner;
 
+import javax.swing.JButton;
+
 import org.rlopez.gestform.dao.FormationDAO;
 import org.rlopez.gestform.dao.PersonneDAO;
 import org.rlopez.gestform.dao.StagiaireDAO;
 
+import org.rlopez.gestform.models.Fenetre;
 import org.rlopez.gestform.models.Formation;
 import org.rlopez.gestform.models.Personne;
 import org.rlopez.gestform.models.Stagiaire;
@@ -27,7 +30,7 @@ public class Index {
 
 		Formation formation = new Formation("DL");
 
-		// insertFormation("plaquiste");
+		Fenetre fen = new Fenetre();
 
 		while (reponse == 'o' || reponse == 'n') {
 
@@ -41,7 +44,9 @@ public class Index {
 			System.out.println("| 1.) Entrer les stagiaires            |");
 			System.out.println("| 2.) Entrer une nouvelle formation    |");
 			System.out.println("| 3.) Voir la liste des stagiaires     |");
-			System.out.println("| 4.) Quitter                          |");
+			System.out.println("| 4.) Rechercher un stagiaire          |");
+			System.out.println("| 5.) Entrer les stagiaires v2         |");
+			System.out.println("| 6.) Quitter                          |");
 			System.out.println("|                                v 0.2 |");
 			System.out.println("----------------------------------------");
 
@@ -92,13 +97,13 @@ public class Index {
 				//System.out.println(formation);
 				Thread.sleep(2000);
 				
-			} else if (menu == 5) {
+			} else if (menu == 4) {
 				System.out.println("Quel nom ?");
 				String newNom = sc.nextLine();
 				Personne p = PersonneDAO.findByNom(newNom);
 				System.out.println(p);
 				
-			} else if (menu == 6) {
+			} else if (menu == 5) {
 				System.out.println("Nom : ");
 				String nomStagiaire = sc.nextLine();
 				System.out.println("Prenom : ");

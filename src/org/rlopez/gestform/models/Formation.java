@@ -36,7 +36,7 @@ import java.util.ArrayList;
 
 	@Override
 	public String toString() {
-		return "Formation " + nom + " " + stagiaires;
+		return "" + nom + "";
 	}
 
 	public int getId() {

@@ -32,6 +32,11 @@ public class Stagiaire extends Personne {
 		this.matricule = matricule;
 		this.formation = formation;
 	}
+	
+	public Stagiaire(String nom, String prenom) {
+		super(nom, prenom);
+	}
+	
 
 	public Formation getFormation() {
 		return formation;
