@@ -12,6 +12,7 @@ import org.rlopez.gestform.dao.StagiaireDAO;
 
 import org.rlopez.gestform.models.Fenetre;
 import org.rlopez.gestform.models.Formation;
+import org.rlopez.gestform.models.MainWindow;
 import org.rlopez.gestform.models.Personne;
 import org.rlopez.gestform.models.Stagiaire;
 
@@ -24,13 +25,14 @@ public class Index {
 
 	public static void main(String[] args) throws InterruptedException {
 		Scanner sc = new Scanner(System.in);
+		MainWindow mainwindow = new MainWindow();
+                mainwindow.setVisible(true);
 
 		int menu = 0;
 		char reponse = 'o';
 
 		Formation formation = new Formation("DL");
 
-		Fenetre fen = new Fenetre();
 
 		while (reponse == 'o' || reponse == 'n') {
 
