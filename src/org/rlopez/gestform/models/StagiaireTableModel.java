@@ -12,13 +12,13 @@ import javax.swing.table.AbstractTableModel;
  *
  * @author rico
  */
-public class FormationTableModel extends AbstractTableModel {
+public class StagiaireTableModel extends AbstractTableModel {
     
-    private final String[] entetes = {"Id", "Nom"};
-    private List<Formation> formations;
+    private final String[] entetes = {"Matricule", "Nom", "Prenom"};
+    private List<Stagiaire> stagiaires;
 
-    public FormationTableModel(List<Formation> formations) {
-        this.formations = formations;
+    public StagiaireTableModel(List<Stagiaire> stagiaires) {
+        this.stagiaires = stagiaires;
     }
 
     @Override
@@ -28,7 +28,7 @@ public class FormationTableModel extends AbstractTableModel {
 
     @Override
     public int getRowCount() {
-        return formations.size();
+        return stagiaires.size();
     }
 
     @Override
@@ -36,8 +36,8 @@ public class FormationTableModel extends AbstractTableModel {
         return entetes.length;
     }
 
-    public Formation getFormation(int rowIndex){
-        return formations.get(rowIndex);
+    public Stagiaire getStagiaire(int rowIndex){
+        return stagiaires.get(rowIndex);
     }
     
     @Override
@@ -45,10 +45,16 @@ public class FormationTableModel extends AbstractTableModel {
         switch (columnIndex) {
 
             case 0:
-                return formations.get(rowIndex).getId();
+                return stagiaires.get(rowIndex).getMatricule();
 
             case 1:
-                return formations.get(rowIndex).getNom();
+                return stagiaires.get(rowIndex).getNom();
+                
+            case 2:
+                return stagiaires.get(rowIndex).getPrenom();
+            
+//            case 3:
+//                return stagiaires.get(rowIndex).getFormation()
 
 
             default:

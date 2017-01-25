@@ -63,15 +63,16 @@ public class StagiaireDAO {
 		try {
 			stm = connection.createStatement();
 
-			String sql = "select * from Stagiaire INNER JOIN Formation ON Stagiaire.id_formation=Formation.id ";
+			String sql = "select * from Stagiaire s INNER JOIN Personne p ON s.id_personne=p.id INNER JOIN Formation f ON s.id_formation=f.id";
 			ResultSet rs = stm.executeQuery(sql);
 
 			while (rs.next()) {
-
+                                int matricule = rs.getInt("matricule");
 				String nom = rs.getString("nom");
 				String prenom = rs.getString("prenom");
+                                //Formation formation = rs.getString("formation"); Voir plus tard
 
-				Stagiaire s = new Stagiaire(nom, prenom);
+				Stagiaire s = new Stagiaire(matricule, nom, prenom);
 
 				Stagiaires.add(s);
 			}
