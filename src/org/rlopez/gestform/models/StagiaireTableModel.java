@@ -14,12 +14,27 @@ import javax.swing.table.AbstractTableModel;
  */
 public class StagiaireTableModel extends AbstractTableModel {
     
-    private final String[] entetes = {"Matricule", "Nom", "Prenom"};
+    private final String[] entetes = {"Matricule", "Nom", "Prenom", "Formation"};
     private List<Stagiaire> stagiaires;
 
     public StagiaireTableModel(List<Stagiaire> stagiaires) {
         this.stagiaires = stagiaires;
     }
+    
+    public void setModel(List<Stagiaire> stagiaires) {
+        this.stagiaires = stagiaires;
+        fireTableDataChanged();
+    }
+    
+    public void addStagiaire(Stagiaire stagiaire){
+        this.stagiaires.add(stagiaire);
+        this.fireTableDataChanged();
+}
+    
+        public void delStagiaire(Stagiaire stagiaire){
+        this.stagiaires.remove(stagiaire);
+        this.fireTableDataChanged();
+}
 
     @Override
     public String getColumnName(int column) {
@@ -53,8 +68,8 @@ public class StagiaireTableModel extends AbstractTableModel {
             case 2:
                 return stagiaires.get(rowIndex).getPrenom();
             
-//            case 3:
-//                return stagiaires.get(rowIndex).getFormation()
+            case 3:
+                return stagiaires.get(rowIndex).getFormation();
 
 
             default:

@@ -25,7 +25,6 @@ public class Stagiaire extends Personne {
 		this.formation = formation;
 	}
 	
-
 	public Stagiaire(int id, String nom, String prenom,
 			int matricule, Formation formation) {
 		super(id, nom, prenom);
@@ -40,6 +39,13 @@ public class Stagiaire extends Personne {
 	
 	public Stagiaire(String nom, String prenom) {
 		super(nom, prenom);
+	}
+        
+        
+        public Stagiaire(int matricule, String nom, String prenom, Formation formation) {
+		super(matricule, nom, prenom);
+                this.matricule = matricule;
+		this.formation = formation;
 	}
 
 	

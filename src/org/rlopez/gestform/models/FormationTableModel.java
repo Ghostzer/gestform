@@ -20,6 +20,16 @@ public class FormationTableModel extends AbstractTableModel {
     public FormationTableModel(List<Formation> formations) {
         this.formations = formations;
     }
+    
+        public void addFormation(Formation formation){
+        this.formations.add(formation);
+        this.fireTableDataChanged();
+}
+        
+        public void delFormation(Formation formation){
+        this.formations.remove(formation);
+        this.fireTableDataChanged();
+}
 
     @Override
     public String getColumnName(int column) {
