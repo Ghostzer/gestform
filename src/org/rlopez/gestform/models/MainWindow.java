@@ -22,6 +22,7 @@ public class MainWindow extends javax.swing.JFrame {
 
     StagiaireTableModel stm;
     FormationTableModel ftm;
+    EcfTableModel etm;
 
     /**
      * Creates new form MainWindow
@@ -35,14 +36,17 @@ public class MainWindow extends javax.swing.JFrame {
         for (Formation f : formations) {
             comboFormations.addItem(f);
         }
-
         jPanelEditStagiaire.setVisible(false);
         btnSupprFormation.setEnabled(false);
         btnAjouterFormation.setEnabled(false);
+        btnClearAdd.setEnabled(false);
+        btnAddStagiaire.setEnabled(false);
+        btnSupprimerStagiaire.setEnabled(false);
 
         tblStagiaire.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 
             public void valueChanged(ListSelectionEvent evt) {
+                btnSupprimerStagiaire.setEnabled(true);
                 int index = tblStagiaire.getSelectedRow(); // On récupère le numéro de la ligne sélectionnée
                 if (index > -1) {
                     Stagiaire sta = stm.getStagiaire(index); //On récupère le stagiaire en fonction du numéro de ligne dans le model
@@ -120,6 +124,9 @@ public class MainWindow extends javax.swing.JFrame {
         editComboFormations = new javax.swing.JComboBox<>();
         btnEditStagiaire = new javax.swing.JButton();
         btnSupprimerStagiaire = new javax.swing.JButton();
+        jPanel5 = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
@@ -243,15 +250,38 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
+        fieldAddMatricule.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                fieldAddMatriculeMouseClicked(evt);
+            }
+        });
+
+        fieldAddNom.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                fieldAddNomMouseClicked(evt);
+            }
+        });
+
         jLabelAddMatricule.setText("Matricule");
 
         jLabelAddNom.setText("Nom");
+
+        fieldAddPrenom.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                fieldAddPrenomMouseClicked(evt);
+            }
+        });
 
         jLabelAddPrenom.setText("Prénom");
 
         jLabelAddFormation.setText("Formation");
 
         btnClearAdd.setText("RAZ");
+        btnClearAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClearAddActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -422,6 +452,27 @@ public class MainWindow extends javax.swing.JFrame {
         );
 
         jTabbedPane1.addTab("Liste des stagiaires", jPanel2);
+
+        jScrollPane3.setViewportView(jTable1);
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 751, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(68, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("ECF", jPanel5);
 
         jMenu1.setText("Fichier");
 
@@ -623,6 +674,27 @@ public class MainWindow extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnAddStagiaireMouseClicked
 
+    private void fieldAddMatriculeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fieldAddMatriculeMouseClicked
+        btnClearAdd.setEnabled(true);
+        btnAddStagiaire.setEnabled(true);
+    }//GEN-LAST:event_fieldAddMatriculeMouseClicked
+
+    private void fieldAddNomMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fieldAddNomMouseClicked
+        btnClearAdd.setEnabled(true);
+        btnAddStagiaire.setEnabled(true);
+    }//GEN-LAST:event_fieldAddNomMouseClicked
+
+    private void fieldAddPrenomMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fieldAddPrenomMouseClicked
+        btnClearAdd.setEnabled(true);
+        btnAddStagiaire.setEnabled(true);
+    }//GEN-LAST:event_fieldAddPrenomMouseClicked
+
+    private void btnClearAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearAddActionPerformed
+        fieldAddNom.setText(null);
+        fieldAddPrenom.setText(null);
+        fieldAddMatricule.setText(null);
+    }//GEN-LAST:event_btnClearAddActionPerformed
+
     /**
          * @param args the command line arguments
          */
@@ -696,10 +768,13 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanelEditStagiaire;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTable jTable1;
     private javax.swing.JTable tblFormation;
     private javax.swing.JTable tblStagiaire;
     // End of variables declaration//GEN-END:variables
