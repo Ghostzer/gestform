@@ -14,7 +14,7 @@ import javax.swing.table.AbstractTableModel;
  */
 public class FormationTableModel extends AbstractTableModel {
     
-    private final String[] entetes = {"Id", "Nom"};
+    private final String[] entetes = {"Nom"};
     private List<Formation> formations;
 
     public FormationTableModel(List<Formation> formations) {
@@ -55,9 +55,6 @@ public class FormationTableModel extends AbstractTableModel {
         switch (columnIndex) {
 
             case 0:
-                return formations.get(rowIndex).getId();
-
-            case 1:
                 return formations.get(rowIndex).getNom();
 
 

@@ -1,20 +1,20 @@
 package org.rlopez.gestform;
 
 
-import java.util.List;
+//import java.util.List;
 import java.util.Scanner;
 
-import javax.swing.JButton;
+//import javax.swing.JButton;
 
-import org.rlopez.gestform.dao.FormationDAO;
-import org.rlopez.gestform.dao.PersonneDAO;
-import org.rlopez.gestform.dao.StagiaireDAO;
+//import org.rlopez.gestform.dao.FormationDAO;
+//import org.rlopez.gestform.dao.PersonneDAO;
+//import org.rlopez.gestform.dao.StagiaireDAO;
 
-import org.rlopez.gestform.models.Fenetre;
-import org.rlopez.gestform.models.Formation;
+//import org.rlopez.gestform.models.Fenetre;
+//import org.rlopez.gestform.models.Formation;
 import org.rlopez.gestform.models.MainWindow;
-import org.rlopez.gestform.models.Personne;
-import org.rlopez.gestform.models.Stagiaire;
+//import org.rlopez.gestform.models.Personne;
+//import org.rlopez.gestform.models.Stagiaire;
 
 
 public class Index {

@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import org.rlopez.gestform.dao.EcfDAO;
 import org.rlopez.gestform.dao.FormationDAO;
 import org.rlopez.gestform.dao.StagiaireDAO;
 
@@ -23,6 +24,17 @@ public class MainWindow extends javax.swing.JFrame {
     StagiaireTableModel stm;
     FormationTableModel ftm;
     EcfTableModel etm;
+
+//    public class PopupErreur {
+//
+//        jop1  = new JOptionPane();
+//
+//        JOptionPane.showMessageDialog (
+//    
+//
+//    null, "Veuillez entrer un nom", "Erreur", JOptionPane.INFORMATION_MESSAGE);
+//    }
+    
 
     /**
      * Creates new form MainWindow
@@ -68,15 +80,14 @@ public class MainWindow extends javax.swing.JFrame {
             }
 
         });
-        
-                tblFormation.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+
+        tblFormation.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 
             public void valueChanged(ListSelectionEvent evt) {
-            btnSupprFormation.setEnabled(true);
+                btnSupprFormation.setEnabled(true);
             }
 
         });
-                
 
     }
 
@@ -124,9 +135,14 @@ public class MainWindow extends javax.swing.JFrame {
         editComboFormations = new javax.swing.JComboBox<>();
         btnEditStagiaire = new javax.swing.JButton();
         btnSupprimerStagiaire = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblEcf = new javax.swing.JTable();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jComboBox2 = new javax.swing.JComboBox<>();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
@@ -419,6 +435,9 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setIcon(new javax.swing.ImageIcon("/home/rico/Images/pdf2.png")); // NOI18N
+        jButton1.setText("Générer PDF");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -429,9 +448,11 @@ public class MainWindow extends javax.swing.JFrame {
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanelEditStagiaire, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane2)
-                    .addComponent(btnSupprimerStagiaire, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jScrollPane2)
+                        .addComponent(btnSupprimerStagiaire, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -440,36 +461,68 @@ public class MainWindow extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jScrollPane2)
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton1)
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnSupprimerStagiaire))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jPanelEditStagiaire, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 6, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
         jTabbedPane1.addTab("Liste des stagiaires", jPanel2);
 
-        jScrollPane3.setViewportView(jTable1);
+        jScrollPane3.setViewportView(tblEcf);
+        etm = new EcfTableModel(EcfDAO.findAllEcf());
+        tblEcf.setModel(etm);
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jLabel2.setText("Choisir une formation");
+
+        jLabel3.setText("Choisir un stagiaire");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 751, Short.MAX_VALUE)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(68, Short.MAX_VALUE))
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3)))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(94, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("ECF", jPanel5);
@@ -537,24 +590,29 @@ public class MainWindow extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAjouterFormationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAjouterFormationActionPerformed
+        String nom_formation = fieldAddFormation.getText();
+        if (nom_formation.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Un nom doit être entré !", "Erreur", JOptionPane.INFORMATION_MESSAGE);
+        } else {
 
-        try {
-            String ajoutFormation = fieldAddFormation.getText();
-            Formation f = new Formation(ajoutFormation);
-            
-            FormationDAO.ajoutFormation(f);
-            
-            ftm.addFormation(f);
-        } catch (Exception ex) {
-            Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
+            try {
+                String ajoutFormation = fieldAddFormation.getText();
+                Formation f = new Formation(ajoutFormation);
+
+                FormationDAO.ajoutFormation(f);
+
+                ftm.addFormation(f);
+            } catch (Exception ex) {
+                Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
-        
 
 
     }//GEN-LAST:event_btnAjouterFormationActionPerformed
 
     private void btnAddStagiaireActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddStagiaireActionPerformed
 
+        
         String nomStagiaire = fieldAddNom.getText();
         String prenomStagiaire = fieldAddPrenom.getText();
         String matriculeStagiaire = fieldAddMatricule.getText();
@@ -563,18 +621,21 @@ public class MainWindow extends javax.swing.JFrame {
 
         Formation formation = (Formation) listeFormation;
 
+        if (nomStagiaire.isEmpty() || prenomStagiaire.isEmpty() || matriculeStagiaire.isEmpty() ) {
+            JOptionPane.showMessageDialog(null, "Veuillez remplir tous les champs", "Erreur", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            
         try {
             Stagiaire sta = new Stagiaire(1, nomStagiaire, prenomStagiaire, strMatriculeStagiaire, formation);
             StagiaireDAO.save(sta);
             stm.addStagiaire(sta);
-        } catch (Exception e1) {
-            // TODO Auto-generated catch block
-            e1.printStackTrace();
-        }
-
         fieldAddNom.setText(null);
         fieldAddPrenom.setText(null);
         fieldAddMatricule.setText(null);
+        } catch (Exception e1) {
+        }
+        }
+
 
 
     }//GEN-LAST:event_btnAddStagiaireActionPerformed
@@ -582,7 +643,7 @@ public class MainWindow extends javax.swing.JFrame {
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         JOptionPane jop1;
         jop1 = new JOptionPane();
-        jop1.showMessageDialog(null, "By Rico", "A propos", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null, "GestForm By Ghost", "A propos", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
@@ -635,8 +696,6 @@ public class MainWindow extends javax.swing.JFrame {
         Formation f = ftm.getFormation(index);
         FormationDAO.supprimerFormation(f);
         ftm.delFormation(f);
-        
-        
 
 //        int ligne = TableauStagiaire.getSelectedRow();
 //        if (ligne > -1) {
@@ -649,7 +708,6 @@ public class MainWindow extends javax.swing.JFrame {
 //                Logger.getLogger(Frame.class.getName()).log(Level.SEVERE, null, ex);
 //            }
 
-
     }//GEN-LAST:event_btnSupprFormationActionPerformed
 
     private void fieldAddFormationMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fieldAddFormationMouseClicked
@@ -659,11 +717,11 @@ public class MainWindow extends javax.swing.JFrame {
     private void btnSupprimerStagiaireActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSupprimerStagiaireActionPerformed
         int index = tblStagiaire.getSelectedRow();
         Stagiaire s = stm.getStagiaire(index);
-        
+
         StagiaireDAO.supprimerStagiaire(s);
         stm.delStagiaire(s);
-        
-        
+
+
     }//GEN-LAST:event_btnSupprimerStagiaireActionPerformed
 
     private void fieldAddFormationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldAddFormationActionPerformed
@@ -696,8 +754,8 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_btnClearAddActionPerformed
 
     /**
-         * @param args the command line arguments
-         */
+     * @param args the command line arguments
+     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -747,7 +805,12 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JTextField fieldEditNom;
     private javax.swing.JTextField fieldEditPrenom;
     private javax.swing.Box.Filler filler1;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabelAddFormation;
     private javax.swing.JLabel jLabelAddMatricule;
     private javax.swing.JLabel jLabelAddNom;
@@ -774,7 +837,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tblEcf;
     private javax.swing.JTable tblFormation;
     private javax.swing.JTable tblStagiaire;
     // End of variables declaration//GEN-END:variables

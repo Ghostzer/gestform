@@ -6,7 +6,10 @@
 package org.rlopez.gestform.models;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.AbstractTableModel;
+import org.rlopez.gestform.dao.EcfDAO;
 
 /**
  *
@@ -14,7 +17,7 @@ import javax.swing.table.AbstractTableModel;
  */
 public class EcfTableModel  extends AbstractTableModel {
     
-    private final String[] entetes = {"Id", "Nom", "id_formation", "resultat"};
+    private final String[] entetes = {"Nom", "Formation", "Resultat"};
     private List<Ecf> ecfs;
 
     public EcfTableModel(List<Ecf> ecfs) {
@@ -57,19 +60,18 @@ public class EcfTableModel  extends AbstractTableModel {
     
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
+        Ecf ecf = ecfs.get(rowIndex);
         switch (columnIndex) {
 
             case 0:
-                return ecfs.get(rowIndex).getId();
+                return ecf.getNom();
 
             case 1:
-                return ecfs.get(rowIndex).getNom();
+                Formation form = ecf.getFormation();
+                return form.getNom();
                 
             case 2:
-                return ecfs.get(rowIndex).getId_formation();
-            
-            case 3:
-                return ecfs.get(rowIndex).getResultat();
+                return ecf.getResultat();
 
 
             default:
@@ -77,4 +79,32 @@ public class EcfTableModel  extends AbstractTableModel {
         }
 
 }
+    
+    @Override
+      public Class<?> getColumnClass(int columnIndex) {
+          return getValueAt(0, columnIndex).getClass();
+}
+      
+      @Override
+    public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
+        Ecf ecf = ecfs.get(rowIndex);
+        if (columnIndex==2){
+            ecf.setResultat(((Boolean)aValue));
+            try {
+                //update database
+                EcfDAO.updateResultat(ecf);
+                fireTableCellUpdated(rowIndex, columnIndex);// notify listeners
+                
+            } catch (Exception ex) {
+//                Logger.getLogger(ECFTableModel.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+    }
+    
+        @Override
+    public boolean isCellEditable(int rowIndex, int columnIndex) {
+        return (columnIndex==2);
+}
+      
 }

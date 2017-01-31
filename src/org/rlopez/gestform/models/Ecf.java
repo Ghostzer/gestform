@@ -9,6 +9,7 @@ public class Ecf {
     int id_formation;
     Boolean resultat;
     ArrayList<Ecf> ecfs = new ArrayList<Ecf>();
+    Formation formation;
 
     private Ecf(int id, String nom, int id_formation, Boolean resultat) {
         super();
@@ -17,6 +18,22 @@ public class Ecf {
         this.id_formation = id_formation;
         this.resultat = resultat;
     }
+    
+        public Ecf(int id, String nom) {
+        super();
+        this.id = id;
+        this.nom = nom;
+    }
+        
+        public Ecf(int id, String nom, Formation formation, Boolean resultat) {
+        super();
+        this.id = id;
+        this.nom = nom;
+        this.formation = formation;
+        this.resultat = resultat;
+    }
+
+
 
     public int getId() {
         return id;
@@ -49,5 +66,15 @@ public class Ecf {
     public void setResultat(Boolean resultat) {
         this.resultat = resultat;
     }
+
+    public Formation getFormation() {
+        return formation;
+    }
+
+    public void setFormation(Formation formation) {
+        this.formation = formation;
+    }
+    
+    
 
 }

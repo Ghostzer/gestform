@@ -43,7 +43,7 @@ public class Stagiaire extends Personne {
         
         
         public Stagiaire(int matricule, String nom, String prenom, Formation formation) {
-		super(matricule, nom, prenom);
+		super(nom, prenom);
                 this.matricule = matricule;
 		this.formation = formation;
 	}
